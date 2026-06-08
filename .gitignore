@@ -1,2 +1,10 @@
 .hermes/
 .specify/scripts/
+
+# Credenciales y secretos — Constitución §III (NUNCA versionar)
+.env
+.env.*
+!.env.*.example
+*.key
+*.pem
+*.crt
