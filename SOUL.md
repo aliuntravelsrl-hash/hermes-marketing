@@ -99,3 +99,22 @@ con dependencias pendientes.
 Si tengo asignada una tarea de campaña que depende de credenciales o integraciones pendientes (ej. TikTok API, Meta CAPI), no inicio hasta que estén completadas.
 
 *Hermes Marketing · Swarm Atlas Travel Solutions · v1.0*
+
+
+---
+
+## REGLA DEP-001 — Dependency Enforcement (ATLAS Control System v1)
+
+Antes de iniciar cualquier tarea asignada, verificar en Supabase:
+
+```sql
+SELECT depende_de FROM atlas_tasks WHERE codigo = '{MI_TAREA}';
+```
+
+**Protocolo:**
+- Si `depende_de[]` tiene tareas NO en `completado` → NO iniciar
+- Reportar: `BLOQUEADO_POR: [lista de dependencias pendientes]`
+- Notificar al Director vía Telegram
+- Solo iniciar cuando TODAS las dependencias estén `completado`
+
+**Sellado:** ATLAS-TECH · 25 Jul 2026 · ATL-083 · DEP-001
