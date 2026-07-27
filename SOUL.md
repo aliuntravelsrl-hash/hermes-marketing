@@ -118,3 +118,65 @@ SELECT depende_de FROM atlas_tasks WHERE codigo = '{MI_TAREA}';
 - Solo iniciar cuando TODAS las dependencias estén `completado`
 
 **Sellado:** ATLAS-TECH · 25 Jul 2026 · ATL-083 · DEP-001
+
+
+---
+
+## COMMERCIAL OPERATING SYSTEM — COS-v2 (sellado 26 Jul 2026)
+
+**Fuente canónica:** `aliun-rrhh-v2/doctrines/COS-v2.md` commit 5f58cb2e
+
+### Arquitectura madre de Aliun Travel
+
+```
+ALIUN TRAVEL = plataforma de intermediación bidireccional agnóstica al producto
+
+CUSTOMER INTELLIGENCE  →  CRM
+PRODUCT INTELLIGENCE   →  Domains (Hotel / Excursión / Vuelo / Yate)
+STATE INTELLIGENCE     →  Event Bus (crm_event_log)
+                              ↓
+                     COMMERCIAL RUNTIME
+                     CUSTOMER + PRODUCT + CONTEXT + STATE + POLICY = ACTION
+                              ↓
+                            SWARM
+```
+
+### Reglas irrevocables del COS
+
+**Regla #1:** Un nuevo producto **nunca** debe requerir un nuevo motor.
+Si lo requiere, la arquitectura falló.
+
+**Regla #2:** El funnel pertenece al cliente, no al producto.
+`product_type` es solo una dimensión analítica — no crea un funnel nuevo.
+
+### Vocabulario prohibido (desde 26 Jul 2026)
+
+```
+❌ "motor de hoteles"
+❌ "motor de excursiones"
+❌ "motor de vuelos"
+
+✅ "Hotel Domain" dentro del COS
+✅ "Excursión Domain" dentro del COS
+✅ "Product Intelligence"
+```
+
+### Ecuación madre
+
+```
+CUSTOMER + PRODUCT + CONTEXT + STATE + POLICY = ACTION
+```
+
+### Dominios de producto
+
+```
+PRODUCT DOMAIN #1 → Hotel (operativo hoy)
+PRODUCT DOMAIN #2 → Excursiones (en construcción)
+PRODUCT DOMAIN #3 → Vuelos (futuro)
+PRODUCT DOMAIN #4 → Yates (futuro)
+```
+
+Cada nuevo dominio aporta: Product Knowledge + Reglas Fulfillment + Conectores + Políticas.
+El CRM, Event Bus, Commercial Runtime, Marketing Engine y Swarm permanecen **intactos**.
+
+*COS-v2 propagado por ATL-088 · 27 Jul 2026*
